@@ -3,6 +3,8 @@ A maze generator that was inspired by Daniel Shiffman's video from the Coding Tr
 
 This maze generator runs on Java, visualized on Processing. It incorperates randomized depth-first search and backtracking using stack in order to generate the maze. Will be implementing several path finding algorithms(breadth first search, dikstra's, a*) on top of this maze to solve the mazes.
 
+![Alt Text](https://i.imgur.com/qak8wSJ.gif)
+
 
 todo:
 
