@@ -9,11 +9,13 @@ import java.io.IOException;
 
 int cols, rows;
 int totalCells;
-int cellSize = 60; //n*n pixels you want each cell to be
-Cell current;
+int mazeGenCount = 0;
+int cellSize = 40; //n*n pixels you want each cell to be
+Cell current, start;
 ArrayList<Cell> myCells = new ArrayList(); 
 Stack<Cell> stack = new Stack();
-Boolean watch = true;
+Boolean generating = true;
+Boolean instantGen = true;
 
 void setup(){
   size(1280,770);
@@ -29,8 +31,14 @@ void draw(){
     drawCellWalls(myCells.get(i));
     highlightCells(myCells.get(i));
   }
-  if(watch)
-    current = watchGenerateMaze(current, myCells, stack);
+  if(!instantGen)
+    if(generating){
+      current = watchGenerateMaze(current, myCells);
+      if (start == current && generating){ 
+        generating = false;
+        System.out.println("Maze complete with " + totalCells + " cells in " + mazeGenCount + " steps.");
+      }
+    }
 }
 
 public void setUpCells(){
@@ -42,6 +50,10 @@ public void setUpCells(){
       }
   }
   current = myCells.get(floor(random(0, myCells.size())));
-  if(!watch)
-    generateMaze(current, myCells, stack);
+  start = current;
+  System.out.println("starting cell: " + current);
+  if(instantGen){
+    generateMaze(current, myCells);
+    System.out.println("Maze complete with " + totalCells + " cells in " + mazeGenCount + " steps.");
+  }
 }

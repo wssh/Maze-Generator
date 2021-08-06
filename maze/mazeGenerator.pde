@@ -33,10 +33,11 @@ public Cell getRandomNeighbor(Cell cell){
   return null;
 }
 
-public void generateMaze(Cell current, ArrayList<Cell> myCells, Stack<Cell> stack){
+public void generateMaze(Cell current, ArrayList<Cell> myCells){
   current.visit(); //set the current node to visited //<>//
   stack.push(current);
   while(!stack.isEmpty()){
+    mazeGenCount++;
     current = stack.pop();
     findNeighbors(current, myCells);  //find if we have VALID unvisited neighbors on the current cell\
     if(current.hasValidNeighbors()){
@@ -49,17 +50,16 @@ public void generateMaze(Cell current, ArrayList<Cell> myCells, Stack<Cell> stac
   }
 }
 
-public Cell watchGenerateMaze(Cell current, ArrayList<Cell> myCells, Stack<Cell> stack){
-  current.visit();
+public Cell watchGenerateMaze(Cell current, ArrayList<Cell> myCells){
+  if(!current.getVisit()) current.visit();
   stack.push(current);
   current.setOnStack(true);
   if(!stack.isEmpty()){
-    System.out.println("stack isn't empty");
+    mazeGenCount++;
     current = stack.pop();
     current.setOnStack(false);
     findNeighbors(current, myCells);
     if(current.hasValidNeighbors()){
-      System.out.println("current has valid neighbors");
       stack.push(current);
       current.setOnStack(true);
       Cell next = getRandomNeighbor(current);

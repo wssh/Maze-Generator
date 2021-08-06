@@ -1,8 +1,9 @@
 void keyPressed() {
     if (key == 'p') {
-      System.out.println("resetting canvas and generate new maze");
-      myCells.clear();
-      setUpCells();
+      System.out.println("run/pause");
+      //myCells.clear();
+      //setUpCells();
+      generating = !generating;
     }
     /*if (key == 's'){ //serialize the maze
       try
