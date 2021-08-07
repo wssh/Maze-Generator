@@ -5,6 +5,12 @@ void keyPressed() {
       //setUpCells();
       generating = !generating;
     }
+    
+    else if (keyCode == DOWN){
+    else if (keyCode == UP){}
+    else if (keyCode == LEFT){}
+    else if (keyCode == RIGHT){}
+    }
     /*if (key == 's'){ //serialize the maze
       try
         {

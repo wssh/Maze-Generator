@@ -7,6 +7,8 @@ class Cell implements Serializable{
   private ArrayList<Cell> neighbors;
   private Boolean visited = false;
   private Boolean onStack = false;
+  private Boolean isStart = false;
+  private Boolean isEnd = false;
   
   Cell(int i, int j, int w) {
     this.col = i;
@@ -33,6 +35,10 @@ class Cell implements Serializable{
   
   public void visit(){
     visited = true;
+  }
+  
+  public void setVisit(Boolean bool){
+    visited = bool;
   }
   
   public Boolean getVisit(){
@@ -64,6 +70,22 @@ class Cell implements Serializable{
       if (neighbors.get(i).getVisit() == false) return true;
     }
     return false;
+  }
+  
+  public Boolean getStart(){
+    return isStart;
+  }
+  
+  public Boolean getEnd(){
+    return isEnd;
+  }
+  
+  public void setStart(){
+    isStart = true;
+  }
+  
+  public void setEnd(){
+    isEnd = true;
   }
   
   @Override

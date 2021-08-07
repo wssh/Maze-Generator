@@ -17,14 +17,42 @@ public void drawCellWalls(Cell cell){
 public void highlightCells(Cell cell){
     int x = (cell.getCol())*(cell.getCellSize());
     int y = (cell.getRows())*(cell.getCellSize());
-    if (cell.getOnStack()){
-      noStroke();
-      fill(0,0,255,100);
-      rect(x,y,cellSize,cellSize);
+    if(generating){
+      if (cell.getOnStack()){
+        noStroke();
+        fill(0,0,255,100);
+        rect(x,y,cellSize,cellSize);
+      }
+      else if(cell.getVisit()){
+        noStroke();
+        fill(50, 255, 50,100);
+        rect(x,y,cellSize,cellSize);
+      }
     }
-    else if(cell.getVisit()){
-      noStroke();
-      fill(50, 255, 50,100);
-      rect(x,y,cellSize,cellSize);
+    else{
+      //System.out.println("not generating, coloring in game tiles");
+      if(cell.getStart()){
+        noStroke();
+        fill(255,0,0,100);
+        rect(x,y,cellSize,cellSize);
+      }
+      else if(cell.getEnd()){
+        noStroke();
+        fill(255,255,0,100);
+        rect(x,y,cellSize,cellSize);
+      }
+      else
+        noStroke();
+        fill(0,0,0,100);
+        rect(x,y,cellSize,cellSize);
     }
-  }
+}
+
+public void drawNavigator(Navigator agent){
+  int x = (agent.getCol() * agent.getCellSize())+(agent.getCellSize()/2);
+  int y = (agent.getRows() * agent.getCellSize())+(agent.getCellSize()/2);
+  System.out.println("drawing agent at " + agent);
+  fill(255,255,255,100);
+  circle(x, y, agent.getPlayerSize());
+  
+}

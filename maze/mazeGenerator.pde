@@ -17,7 +17,7 @@ public void findNeighbors(Cell cell, ArrayList<Cell> myCells){ //<>//
 }
 
 public int index(int i, int j){
-  if (i < 0 || j <0 || i > cols -1 || j > rows -1) 
+  if (i < 0 || j < 0 || i > cols -1 || j > rows -1) 
     return -1;
   return i + j * cols; //gets the numeric number pixel on screen. x + y * width
 }
