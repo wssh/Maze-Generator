@@ -41,17 +41,17 @@ public void highlightCells(Cell cell){
         fill(255,255,0,100);
         rect(x,y,cellSize,cellSize);
       }
-      else
+      else{
         noStroke();
         fill(0,0,0,100);
         rect(x,y,cellSize,cellSize);
+      }
     }
 }
 
 public void drawNavigator(Navigator agent){
-  int x = (agent.getCol() * agent.getCellSize())+(agent.getCellSize()/2);
+  int x = (agent.getCol() * agent.getCellSize())+(agent.getCellSize()/2); //centers the agent on the center of the cell
   int y = (agent.getRows() * agent.getCellSize())+(agent.getCellSize()/2);
-  System.out.println("drawing agent at " + agent);
   fill(255,255,255,100);
   circle(x, y, agent.getPlayerSize());
   

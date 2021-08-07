@@ -10,7 +10,7 @@ import java.io.IOException;
 int cols, rows;
 int totalCells;
 int mazeGenCount = 0;
-int cellSize = 80; //n*n pixels you want each cell to be
+int cellSize = 40; //n*n pixels you want each cell to be
 Cell current, start, end;
 Navigator player;
 ArrayList<Cell> myCells = new ArrayList(); 
@@ -46,7 +46,6 @@ void draw(){
     }
     
   if(playing){
-    System.out.println("player spawned at " + player);
     drawNavigator(player);
   }
 }
@@ -81,9 +80,5 @@ public void setUpCells(){
     System.out.println("Maze complete with " + totalCells + " cells in " + mazeGenCount + " steps. Generating = " + generating);
     resetCells();
     playing = true;
-    if(playing){
-      System.out.println("player spawned at " + player);
-      drawNavigator(player);
-    }  
   }
 }

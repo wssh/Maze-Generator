@@ -24,6 +24,22 @@ class Navigator{
     return playerSize;
   }
   
+  public void moveDown(){
+    row++;
+  }
+  
+  public void moveUp(){
+    row--;
+  }
+  
+  public void moveLeft(){
+    col--;
+  }
+  
+  public void moveRight(){
+    col++;
+  }
+  
   @Override
   public String toString(){
     return "X: " + col + " Y: " + row;
