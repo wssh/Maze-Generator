@@ -4,6 +4,7 @@ int cols, rows;
 int totalCells;
 int mazeGenCount = 0;
 int cellSize = 80; //n*n pixels you want each cell to be
+int offset = 50;
 
 Cell current, start, goal;
 Navigator player;
@@ -13,11 +14,13 @@ Boolean generating = true;
 Boolean instantGen = false;
 Boolean resetVisits = false;
 Boolean playing = false;
-Boolean settingsComplete = false;
+Boolean settingsComplete = true; //toggle this to enter a maze asap
 
 void setup(){
   size(1280,720);
-  //setUpCells();
+  if (settingsComplete) //skip start UI part
+    instantGen = true;
+    setUpCells();
 }
 
 void draw(){
@@ -59,7 +62,7 @@ public void resetCells(){
 
 public void setUpCells(){
   cols = (width)/cellSize;
-  rows = (height)/cellSize;
+  rows = (height-offset)/cellSize;
   totalCells = cols * rows;
   System.out.println("setting up new cells");
   for (int j = 0; j < rows; j++) {
