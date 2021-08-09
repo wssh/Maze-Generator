@@ -1,5 +1,5 @@
-public void drawCellWalls(Cell cell){
-    
+
+public void drawCellWalls(Cell cell){   
     int x = (cell.getCol())*(cell.getCellSize());
     int y = (cell.getRows())*(cell.getCellSize());
     Boolean[] wall = cell.getWalls();

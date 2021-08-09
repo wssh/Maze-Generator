@@ -1,52 +1,51 @@
 import java.util.Stack;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.EOFException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 int cols, rows;
 int totalCells;
 int mazeGenCount = 0;
-int cellSize = 40; //n*n pixels you want each cell to be
-Cell current, start, end;
+int cellSize = 80; //n*n pixels you want each cell to be
+
+Cell current, start, goal;
 Navigator player;
 ArrayList<Cell> myCells = new ArrayList(); 
 Stack<Cell> stack = new Stack();
 Boolean generating = true;
-Boolean instantGen = true;
+Boolean instantGen = false;
 Boolean resetVisits = false;
 Boolean playing = false;
+Boolean settingsComplete = false;
 
 void setup(){
-  size(1280,770);
-  cols = (width)/cellSize;
-  rows = (height-50)/cellSize;
-  totalCells = cols * rows;
-  setUpCells();
+  size(1280,720);
+  //setUpCells();
 }
 
 void draw(){
   background(51);
-  for (int i = 0; i < myCells.size(); i++) {
-    drawCellWalls(myCells.get(i));
-    highlightCells(myCells.get(i));
-  }
-  if(!instantGen)
-    if(generating){
-      current = watchGenerateMaze(current, myCells);
-      if (start == current && generating){ 
-        generating = false;
-        resetCells();
-        System.out.println("Maze complete with " + totalCells + " cells in " + mazeGenCount + " steps. Generating = " + generating);
-        playing = true;
-      }
+  if(settingsComplete){
+    for (int i = 0; i < myCells.size(); i++) {
+      drawCellWalls(myCells.get(i));
+      highlightCells(myCells.get(i));
     }
-    
-  if(playing){
-    drawNavigator(player);
+    if(!instantGen)
+      if(generating){
+        current = watchGenerateMaze(current, myCells);
+        if (start.equals(current) && generating){ 
+          generating = false;
+          resetCells();
+          System.out.println("Maze complete with " + totalCells + " cells in " + mazeGenCount + " steps. Generating = " + generating);
+          playing = true;
+        }
+      }
+      
+    if(playing){
+      drawNavigator(player);
+      if(isOnWinningCell(player, goal)) System.out.println("goal reached");
+    }
+  }
+  else{
+    //gui for user to manipulate settings before maze generation
+    drawGui();
   }
 }
 
@@ -59,20 +58,23 @@ public void resetCells(){
 }
 
 public void setUpCells(){
-    System.out.println("setting up new cells");
-    for (int j = 0; j < rows; j++) {
-      for (int i = 0; i < cols; i++){
-        Cell tempCell = new Cell(i,j,cellSize);
-        myCells.add(tempCell);
-      }
+  cols = (width)/cellSize;
+  rows = (height)/cellSize;
+  totalCells = cols * rows;
+  System.out.println("setting up new cells");
+  for (int j = 0; j < rows; j++) {
+    for (int i = 0; i < cols; i++){
+      Cell tempCell = new Cell(i,j,cellSize);
+      myCells.add(tempCell);
+    }
   }
-  current = myCells.get(floor(random(0, myCells.size()))); //pick a random node to start
-  //current = myCells.get(0); //pick the very first node
-  end = myCells.get(myCells.size()-1); //pick the last cell as the goal
+  //current = myCells.get(floor(random(0, myCells.size()))); //pick a random node to start
+  current = myCells.get(0); //pick the very first node
+  goal = myCells.get(myCells.size()-1); //pick the last cell as the goal
   start = current; //record the first cell as the starting point
   player = new Navigator(start.getCol(), start.getRows(), cellSize);
   start.setStart();
-  end.setEnd();
+  goal.setEnd();
   System.out.println("starting cell: " + current);
   if(instantGen){
     generateMaze(current, myCells);

@@ -33,6 +33,10 @@ public Boolean isMovementValid(Navigator agent, Movement movement, ArrayList<Cel
       }
       return true;
   }
-  return true;
-  
+  return true; 
+}
+
+public Boolean isOnWinningCell(Navigator agent, Cell goalCell){
+  if ((agent.getCol() == goalCell.getCol()) && (agent.getRows() == goalCell.getRows())) return true;
+  return false;
 }
