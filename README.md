@@ -1,17 +1,10 @@
 # Maze-Generator
 A maze generator that was inspired by Daniel Shiffman's video from the Coding Train YouTube channel.
 
-This maze generator runs on Java, visualized on Processing. It incorperates randomized depth-first search and backtracking using a stack in order to generate the maze. Will be implementing several path finding algorithms(breadth first search, dikstra's, a*) on top of this maze to solve the mazes.
+This maze generator runs on Java, visualized on Processing. It incorperates randomized depth-first search and backtracking using a stack in order to generate the maze. After generating the maze, the user is able to play the maze, or have the maze solved using breadth first search as the pathfinding algorithm.
 
 ![Alt Text](https://i.imgur.com/qak8wSJ.gif)
 
-
-todo:
-
-serialization of larger mazes (currently throws stack overflow if there are too many cells)
-
-solve the maze using any algorithm, or more
-
-make a game
-
-make a UI where variables can be dynamically changed
+todos:
+Make the BFS run on the draw function so the user is able to visualize if they choose to.
+Implement A*, Dikstra's and the greedy algorithm.
