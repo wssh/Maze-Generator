@@ -1,9 +1,9 @@
 public void findNeighbors(Cell cell, ArrayList<Cell> myCells){ //<>//
   Cell t, r, b, l;
-  int top = index(cell.getCol()-1, cell.getRows());
-  int right = index(cell.getCol(), cell.getRows()+1);
-  int bottom = index(cell.getCol()+1, cell.getRows());
-  int left = index(cell.getCol(), cell.getRows()-1);
+  int top = index(cell.getCol(), cell.getRows()-1);
+  int right = index(cell.getCol()+1, cell.getRows());
+  int bottom = index(cell.getCol(), cell.getRows()+1);
+  int left = index(cell.getCol()-1, cell.getRows());
   
   t = (top != -1) ? myCells.get(top) : null;
   r = (right != -1) ? myCells.get(right) : null;

@@ -9,6 +9,8 @@ class Cell implements Serializable{
   private Boolean onStack = false;
   private Boolean isStart = false;
   private Boolean isEnd = false;
+  private Boolean isPath = false;
+  private Cell parent;
   
   Cell(int i, int j, int w) {
     this.col = i;
@@ -86,6 +88,26 @@ class Cell implements Serializable{
   
   public void setEnd(){
     isEnd = true;
+  }
+  
+  public void clearNeighbors(){
+    neighbors.clear();
+  }
+  
+  public void setParent(Cell parent){
+    this.parent = parent;
+  }
+  
+  public Cell getParent(){
+     return parent;
+  }
+  
+  public void isPath(){
+    isPath = true;
+  }
+  
+  public Boolean getIsPath(){
+    return isPath;
   }
   
   @Override

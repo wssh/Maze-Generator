@@ -30,6 +30,17 @@ public void highlightCells(Cell cell){
       }
     }
     else{
+      if(solving){
+        if(cell.getVisit()){
+          noStroke();
+          fill(100, 0, 0, 80);
+          rect(x,y,cellSize,cellSize);
+        }
+        if(cell.getIsPath()){
+          fill(255,255,0,100);
+          rect(x,y,cellSize,cellSize);
+        }
+      }
       //System.out.println("not generating, coloring in game tiles");
       if(cell.getStart()){
         noStroke();

@@ -4,6 +4,14 @@ int circleY2 = 560;
 Boolean [] circleOver = {false, false, false, false, false, false};
 Boolean [] circleSelect = {false, true, false, false, false, true};
 
+Boolean [] gameButtonOver = {false, false, false};
+int [] gameButton = {15, 670, 120, 40}; //x, y, w, h
+int buttonOffsetY = 10;
+int buttonOffsetX = 130;
+int textButtonOffsetY = 10;
+String [] algoPickText = {"BFS", "Dikstra", "A*", "Greedy"};
+int algoIndex = 0;
+
 int finishX = 540;
 int finishY = 640;
 int finishW = 200;
@@ -13,6 +21,9 @@ Boolean finishOver = false;
 color defaultColor = color(255); //white
 color highlightColor = color(255,255,0); //yellow
 color selectColor = color(0,255,0); //green
+
+String text1 = "Solve it!";
+String text2 = "Solved!";
 
 public void drawGui(){
   update(mouseX, mouseY);
@@ -25,6 +36,8 @@ public void drawGui(){
   textSize(24);
   text("This is an interative maze generator using depth first search.", 10, 150);
   text("Backtracking is applied here using a stack instead of recursion to avoid stack overflow.", 10, 180);
+  text("After the maze is generated, you can use your arrow keys to move the agent and solve the maze yourself", 10, 210);
+  text("Alternatively, you can choose to have the maze automatically solved with a graph traversing algorithm", 10, 240);
   
   if(circleSelect[3] && !instantGen){
     fill(255,0,0);
@@ -97,6 +110,29 @@ public void drawGui(){
   
 }
 
+public void drawPlayGui(){
+  //y = 660 is where bottom starts
+  //670 for large and xl
+  //offset -10 for m
+  //offset -30 for s
+  update(mouseX, mouseY);
+  stroke(0,0,0);
+  if(gameButtonOver[0]) fill(highlightColor);
+  else fill(defaultColor);
+  rect(gameButton[0],gameButton[1]-buttonOffsetY,gameButton[2],gameButton[3]);
+  if(gameButtonOver[1]) fill(highlightColor);
+  else fill(defaultColor);
+  rect(gameButton[0]+buttonOffsetX,gameButton[1]-buttonOffsetY,gameButton[2],gameButton[3]);
+  if(gameButtonOver[2]) fill(highlightColor);
+  else fill(defaultColor);
+  rect(1145,gameButton[1]-buttonOffsetY,gameButton[2], gameButton[3]);
+  fill(0,0,0);
+  textSize(24);
+  text(text1 ,gameButton[0]+20, gameButton[1]+buttonOffsetY+textButtonOffsetY);
+  text(algoPickText[algoIndex], gameButton[0]+20+buttonOffsetX, gameButton[1]+buttonOffsetY+textButtonOffsetY);
+  text("Main Menu", 1145+5, gameButton[1]+buttonOffsetY+textButtonOffsetY);
+}
+
 public Boolean overCircle(int x, int y, int diameter){
   float disX = x - mouseX;
   float disY = y - mouseY;
@@ -111,75 +147,103 @@ public Boolean overRect(int x, int y, int w, int h){
 }
 
 public void update(int x, int y){
-  System.out.println(mouseX + " " + mouseY);
-  if(overCircle(circleX[0], circleY, 50)){
-    circleOver[0] = true;
-    circleOver[1] = false;
-    circleOver[2] = false;
-    circleOver[3] = false;
-    circleOver[4] = false;
-    circleOver[5] = false;
-    finishOver = false;
+  //System.out.println(mouseX + " " + mouseY);
+  if(!playing){ //main menu logic
+    if(overCircle(circleX[0], circleY, 50)){
+      circleOver[0] = true;
+      circleOver[1] = false;
+      circleOver[2] = false;
+      circleOver[3] = false;
+      circleOver[4] = false;
+      circleOver[5] = false;
+      finishOver = false;
+    }
+    else if(overCircle(circleX[1], circleY, 50)){
+      circleOver[1] =  true;
+      circleOver[0] = false;
+      circleOver[2] = false;
+      circleOver[3] = false;
+      circleOver[4] = false;
+      circleOver[5] = false;
+      finishOver = false;
+    }
+    else if(overCircle(circleX[2], circleY, 50)){
+      circleOver[2] = true;
+      circleOver[0] = false;
+      circleOver[1] = false;
+      circleOver[3] = false;
+      circleOver[4] = false;
+      circleOver[5] = false;
+      finishOver = false;
+    }
+    else if(overCircle(circleX[3], circleY, 50)){
+      circleOver[2] = false;
+      circleOver[0] = false;
+      circleOver[1] = false;
+      circleOver[3] = true;
+      circleOver[4] = false;
+      circleOver[5] = false;
+      finishOver = false;
+    }
+    else if(overCircle(circleX[4], circleY2, 50)){
+      circleOver[2] = false;
+      circleOver[0] = false;
+      circleOver[1] = false;
+      circleOver[3] = false;
+      circleOver[4] = true;
+      circleOver[5] = false;
+      finishOver = false;
+    }
+    else if(overCircle(circleX[5], circleY2, 50)){
+      circleOver[2] = false;
+      circleOver[0] = false;
+      circleOver[1] = false;
+      circleOver[3] = false;
+      circleOver[4] = false;
+      circleOver[5] = true;
+      finishOver = false;
+    }
+    else if(overRect(finishX, finishY, finishW, finishH)){
+      finishOver = true;
+      circleOver[0] = false;
+      circleOver[1] = false;
+      circleOver[2] = false;
+      circleOver[3] = false;
+    }
+    else{
+      circleOver[0] = false;
+      circleOver[1] = false;
+      circleOver[2] = false;
+      circleOver[3] = false;
+      circleOver[4] = false;
+      circleOver[5] = false;
+      finishOver = false;
+    }
   }
-  else if(overCircle(circleX[1], circleY, 50)){
-    circleOver[1] =  true;
-    circleOver[0] = false;
-    circleOver[2] = false;
-    circleOver[3] = false;
-    circleOver[4] = false;
-    circleOver[5] = false;
-    finishOver = false;
-  }
-  else if(overCircle(circleX[2], circleY, 50)){
-    circleOver[2] = true;
-    circleOver[0] = false;
-    circleOver[1] = false;
-    circleOver[3] = false;
-    circleOver[4] = false;
-    circleOver[5] = false;
-    finishOver = false;
-  }
-  else if(overCircle(circleX[3], circleY, 50)){
-    circleOver[2] = false;
-    circleOver[0] = false;
-    circleOver[1] = false;
-    circleOver[3] = true;
-    circleOver[4] = false;
-    circleOver[5] = false;
-    finishOver = false;
-  }
-  else if(overCircle(circleX[4], circleY2, 50)){
-    circleOver[2] = false;
-    circleOver[0] = false;
-    circleOver[1] = false;
-    circleOver[3] = false;
-    circleOver[4] = true;
-    circleOver[5] = false;
-    finishOver = false;
-  }
-  else if(overCircle(circleX[5], circleY2, 50)){
-    circleOver[2] = false;
-    circleOver[0] = false;
-    circleOver[1] = false;
-    circleOver[3] = false;
-    circleOver[4] = false;
-    circleOver[5] = true;
-    finishOver = false;
-  }
-  else if(overRect(finishX, finishY, finishW, finishH)){
-    finishOver = true;
-    circleOver[0] = false;
-    circleOver[1] = false;
-    circleOver[2] = false;
-    circleOver[3] = false;
-  }
-  else{
-    circleOver[0] = false;
-    circleOver[1] = false;
-    circleOver[2] = false;
-    circleOver[3] = false;
-    circleOver[4] = false;
-    circleOver[5] = false;
-    finishOver = false;
+  //in game menu logic
+  if(playing){
+    //System.out.println("playing logic running");
+    if(overRect(gameButton[0],gameButton[1]-buttonOffsetY,gameButton[2],gameButton[3])){
+      gameButtonOver[0] = true;
+      gameButtonOver[1] = false;
+      gameButtonOver[2] = false;
+    }
+    else if(overRect(gameButton[0]+buttonOffsetX,gameButton[1]-buttonOffsetY,gameButton[2],gameButton[3])){
+      gameButtonOver[0] = false;
+      gameButtonOver[1] = true;
+      gameButtonOver[2] = false;
+      
+    }
+    else if(overRect(1145,gameButton[1]-buttonOffsetY,gameButton[2], gameButton[3])){
+      gameButtonOver[0] = false;
+      gameButtonOver[1] = false;
+      gameButtonOver[2] = true;
+    }
+    else{
+      gameButtonOver[0] = false;
+      gameButtonOver[1] = false;
+      gameButtonOver[2] = false;
+    }
+    if(solved) text1 = "Solved!";
   }
 }

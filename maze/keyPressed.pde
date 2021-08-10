@@ -6,27 +6,21 @@ enum Movement{
 }
 
 void keyPressed() {
-    if (key == 'p') {
-      System.out.println("run/pause");
-      //myCells.clear();
-      //setUpCells();
-      generating = !generating;
+  if (keyCode == DOWN){
+    if(isMovementValid(player, Movement.goDown, myCells)){
+      player.moveDown();
     }
-    
-    else if (keyCode == DOWN){
-      if(isMovementValid(player, Movement.goDown, myCells))
-        player.moveDown();
-    }
-    else if (keyCode == UP){
-      if(isMovementValid(player, Movement.goUp, myCells))
-        player.moveUp();
-    }
-    else if (keyCode == LEFT){
-      if(isMovementValid(player, Movement.goLeft, myCells))
-        player.moveLeft();
-    }
-    else if (keyCode == RIGHT){
-      if(isMovementValid(player, Movement.goRight, myCells))
-        player.moveRight();
-    }
+  }
+  else if (keyCode == UP){
+    if(isMovementValid(player, Movement.goUp, myCells))
+      player.moveUp();
+  }
+  else if (keyCode == LEFT){
+    if(isMovementValid(player, Movement.goLeft, myCells))
+      player.moveLeft();
+  }
+  else if (keyCode == RIGHT){
+    if(isMovementValid(player, Movement.goRight, myCells))
+      player.moveRight();
+  }
 }

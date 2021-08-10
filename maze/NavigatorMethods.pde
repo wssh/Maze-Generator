@@ -40,3 +40,9 @@ public Boolean isOnWinningCell(Navigator agent, Cell goalCell){
   if ((agent.getCol() == goalCell.getCol()) && (agent.getRows() == goalCell.getRows())) return true;
   return false;
 }
+
+public Cell getNavCell(Navigator agent, ArrayList<Cell> myCells){
+  int x = agent.getCol();
+  int y = agent.getRows();
+  return myCells.get(index(x, y));
+}

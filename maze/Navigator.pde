@@ -1,13 +1,23 @@
 class Navigator{
   private int col, row, cellSize, playerSize;
+  private ArrayList<Cell> neighbors;
   
   Navigator(int col, int row, int cellSize){
     this.col = col;
     this.row = row;
     this.cellSize = cellSize;
     this.playerSize = (cellSize > 1) ? cellSize/2 : cellSize;
+    neighbors = new ArrayList<>();
   }
   
+  public void addNeighbors(Cell cell){
+    neighbors.add(cell);
+  }
+  
+  public ArrayList<Cell> getNeighbors(){
+    return neighbors;
+  }
+ 
   public int getCol(){
     return col;
   }
