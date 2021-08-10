@@ -7,6 +7,7 @@ This maze generator runs on Java, visualized on Processing. It incorperates rand
 
 
 todos:
-Make the BFS run on the draw function so the user is able to visualize if they choose to.
 
-Implement A*, Dikstra's and the greedy algorithm.
+*Make the BFS run on the draw function so the user is able to visualize if they choose to.
+
+*Implement A*, Dikstra's and the greedy algorithm.
