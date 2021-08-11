@@ -1,4 +1,4 @@
-public void findNeighbors(Cell cell, ArrayList<Cell> myCells){ //<>//
+public void findNeighbors(Cell cell, ArrayList<Cell> myCells){ //<>// //<>//
   Cell t, r, b, l;
   int top = index(cell.getCol(), cell.getRows()-1);
   int right = index(cell.getCol()+1, cell.getRows());
@@ -34,7 +34,7 @@ public Cell getRandomNeighbor(Cell cell){
 }
 
 public void generateMaze(Cell current, ArrayList<Cell> myCells){
-  current.visit(); //set the current node to visited //<>//
+  current.visit(); //set the current node to visited //<>// //<>//
   stack.push(current);
   while(!stack.isEmpty()){
     mazeGenCount++;
@@ -45,7 +45,7 @@ public void generateMaze(Cell current, ArrayList<Cell> myCells){
       Cell next = getRandomNeighbor(current);
       removeWalls(current, next);
       next.visit();
-      stack.push(next); //<>//
+      stack.push(next); //<>// //<>//
     }
   }
 }

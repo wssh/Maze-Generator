@@ -26,7 +26,7 @@ void mousePressed() { //<>// //<>//
     }
     else if(circleOver[3] == true){
       circleSelect[3] = true;
-      cellSize = 20;
+      cellSize = 10;
       buttonOffsetY = 0;
       textButtonOffsetY = 30;
       for(int i = 0; i < circleSelect.length-2; i++)

@@ -16,7 +16,7 @@ class Cell implements Serializable{
     this.col = i;
     this.row = j;
     this.cellSize = w;
-    neighbors = new ArrayList();
+    neighbors = new ArrayList<>();
   }
   
   public int getCol(){

@@ -38,10 +38,12 @@ public void drawGui(){
   text("Backtracking is applied here using a stack instead of recursion to avoid stack overflow.", 10, 180);
   text("After the maze is generated, you can use your arrow keys to move the agent and solve the maze yourself", 10, 210);
   text("Alternatively, you can choose to have the maze automatically solved with a graph traversing algorithm", 10, 240);
+  text("Currently, only Breadth First Search(BFS) is the only available path finding algorithm.", 10, 270);
+  text("It guarantees the shortest path to the goal.", 10, 300);
   
   if(circleSelect[3] && !instantGen){
     fill(255,0,0);
-    text("Since the maze is generated using dfs, watching the maze generate will take a while.", 10, circleY-40);
+    text("Since the maze is generated using Depth First Search(dfs), watching an extra large maze generate will take a while.", 10, circleY-40);
   }
   
   //maze size selection
@@ -244,6 +246,10 @@ public void update(int x, int y){
       gameButtonOver[1] = false;
       gameButtonOver[2] = false;
     }
-    if(solved) text1 = "Solved!";
+    if(solved){
+      text1 = "Solved!";
+      text("Follow the yellow path to the goal!", gameButton[0]+20+(buttonOffsetX*2), gameButton[1]+buttonOffsetY+textButtonOffsetY);
+    }
+    else text1 = "Solve it!";
   }
 }
