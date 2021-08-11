@@ -1,4 +1,4 @@
-# Maze-Generator
+# Maze-Game
 A maze generator that was inspired by Daniel Shiffman's video from the Coding Train YouTube channel.
 
 This maze generator runs on Java, visualized on Processing. It incorperates randomized depth-first search and backtracking using a stack in order to generate the maze. After generating the maze, the user is able to play the maze, or have the maze solved using breadth first search as the pathfinding algorithm.
